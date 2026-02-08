@@ -25,6 +25,17 @@ Change-Point-Analysis-and-Statistical-Modeling-of-Time-Series-Data/
 │   ├── main_analysis.py       # Complete analysis pipeline script
 │   ├── bayesian_changepoint.py         # ⭐ Bayesian change point models
 │   └── changepoint_visualization.py    # ⭐ Change point visualizations
+├── backend/                    # 🌐 Flask REST API
+│   ├── app.py                 # Main API application (9 endpoints)
+│   └── requirements.txt       # Backend dependencies
+├── frontend/                   # 🌐 React Dashboard
+│   ├── src/
+│   │   ├── components/        # 7 reusable components
+│   │   ├── pages/            # 3 main pages (Dashboard, Events, Change Points)
+│   │   ├── services/         # API service layer
+│   │   └── App.jsx           # Main application
+│   ├── package.json          # Frontend dependencies
+│   └── vite.config.js        # Build configuration
 ├── results/                    # ⭐ Generated outputs (model traces, summaries)
 ├── docs/                       # Project documentation
 │   ├── analysis_workflow.md    # Complete analysis workflow (1-2 pages)
@@ -35,18 +46,62 @@ Change-Point-Analysis-and-Statistical-Modeling-of-Time-Series-Data/
 │   └── project_deliverables_summary.md      # ⭐ Deliverables checklist
 ├── references/                 # Supporting reference data
 │   └── geopolitical_events.csv # ⭐ 45 key oil market events (1990-2024)
+├── DASHBOARD_README.md         # 🌐 Dashboard setup guide
+├── API_DOCUMENTATION.md        # 🌐 API reference
+├── QUICK_START_GUIDE.md        # 🌐 Quick start guide
+├── start_dashboard.sh          # 🌐 Linux/Mac startup script
+├── start_dashboard.bat         # 🌐 Windows startup script
 ├── requirements.txt            # Python package dependencies (⭐ updated with PyMC)
-├── .gitignore                  # Data folder exclusion 
+├── .gitignore                  # Data folder exclusion
 └── README.md                   # This file
 ```
 
-⭐ = New files for Bayesian change point analysis
+⭐ = Bayesian change point analysis files
+🌐 = Interactive dashboard files
 
 ---
 
 ## Deliverables
 
-### 1. Bayesian Change Point Analysis ⭐ NEW
+### 1. Interactive Dashboard 🌐 NEW
+**Location:** `backend/` and `frontend/`
+
+A comprehensive full-stack web application for visualizing and analyzing Brent oil prices:
+
+**Backend (Flask REST API):**
+- 9 documented API endpoints serving analysis results
+- Historical price data with technical indicators (MA, Bollinger Bands)
+- Event correlation analysis
+- Volatility analysis and regime detection
+- Change point detection results
+- Performance metrics (returns, volatility, Sharpe ratio)
+
+**Frontend (React Application):**
+- **Main Dashboard:** Overview with metrics, price charts, and volatility analysis
+- **Event Analysis:** Interactive event impact correlation and timeline
+- **Change Point Analysis:** Structural break detection visualization
+- 7 reusable components with Recharts visualizations
+- Date range filtering with presets
+- Event type filtering and highlighting
+- Responsive design for desktop, tablet, and mobile
+
+**Quick Start:**
+```bash
+# Linux/Mac
+./start_dashboard.sh
+
+# Windows
+start_dashboard.bat
+
+# Access at http://localhost:3000
+```
+
+**Documentation:**
+- [`DASHBOARD_README.md`](DASHBOARD_README.md) - Complete setup guide
+- [`API_DOCUMENTATION.md`](API_DOCUMENTATION.md) - API reference
+- [`QUICK_START_GUIDE.md`](QUICK_START_GUIDE.md) - 5-minute quick start
+
+### 2. Bayesian Change Point Analysis ⭐
 **Location:** `notebooks/02_bayesian_changepoint_analysis.ipynb`
 
 Comprehensive Bayesian change point detection implementation:
@@ -241,7 +296,34 @@ Comprehensive theoretical documentation:
 
 ### Usage
 
-#### Option 1: Jupyter Notebook (Recommended for Exploration)
+#### Option 1: Interactive Dashboard 🌐 (Recommended for Stakeholders)
+
+**Quick Start:**
+```bash
+# Linux/Mac
+./start_dashboard.sh
+
+# Windows
+start_dashboard.bat
+```
+
+The dashboard will be available at:
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:5000
+
+**Features:**
+- Interactive price charts with moving averages and Bollinger Bands
+- Event correlation analysis with filtering
+- Change point detection visualization
+- Date range selection and event highlighting
+- Responsive design for all devices
+
+**Documentation:**
+- See [`QUICK_START_GUIDE.md`](QUICK_START_GUIDE.md) for 5-minute setup
+- See [`DASHBOARD_README.md`](DASHBOARD_README.md) for complete guide
+- See [`API_DOCUMENTATION.md`](API_DOCUMENTATION.md) for API reference
+
+#### Option 2: Jupyter Notebook (Recommended for Analysis)
 
 **For Initial Time Series Analysis:**
 ```bash
