@@ -132,6 +132,59 @@ This document outlines the comprehensive workflow for analyzing Brent oil price 
 
 ---
 
+## Code Implementation Reference
+
+This workflow is implemented through the following code artifacts:
+
+### Python Modules (`src/`)
+
+| Module | Workflow Phases | Key Functions |
+|--------|-----------------|---------------|
+| `data_loader.py` | Phase 1 | `load_brent_data()`, `validate_data()`, `clean_data()`, `compute_log_returns()` |
+| `time_series_analysis.py` | Phase 2 | `run_stationarity_tests()` (ADF, KPSS), `compute_volatility()`, `test_arch_effects()` |
+| `visualization.py` | Phase 2, 6 | `plot_price_trend()`, `plot_volatility_analysis()`, `plot_stationarity_diagnostics()`, `plot_events_overlay()` |
+| `main_analysis.py` | All Phases | Complete pipeline script executing full workflow |
+
+### Jupyter Notebook (`notebooks/`)
+
+**`01_time_series_analysis.ipynb`** - Interactive implementation of:
+- Data loading with validation checks
+- Stationarity testing (ADF, KPSS) with annotated outputs
+- Log returns computation and statistical summary
+- Volatility analysis with regime detection (Low/Medium/High)
+- ARCH effects testing for volatility clustering
+- 5 comprehensive visualizations saved to `outputs/`
+
+### Event Dataset (`references/`)
+
+**`geopolitical_events.csv`** - Structured dataset with 18 events:
+- Event_Date, Event_Type, Event_Name, Description
+- Expected_Impact (High/Moderate/Low Positive/Negative)
+- Region classification
+
+### Usage Example
+
+```python
+# Load and validate data
+df = load_brent_data("data/raw/BrentOilPrices.csv")
+validation = validate_data(df)
+
+# Run stationarity tests
+results = run_stationarity_tests(df['Price'], "Price Levels")
+print(f"Classification: {results['consensus']['classification']}")
+
+# Compute returns and volatility
+df_returns = compute_log_returns(df)
+df_vol = compute_volatility(df_returns)
+df_regimes = detect_volatility_regimes(df_vol)
+
+# Generate visualizations
+plot_price_trend(df)
+plot_volatility_analysis(df_regimes)
+```
+
+---
+
 ## Communication Channels
 
 | Audience | Format | Channel | Frequency |
