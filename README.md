@@ -14,12 +14,22 @@ Change-Point-Analysis-and-Statistical-Modeling-of-Time-Series-Data/
 │   ├── raw/                    # Original Brent oil price data (gitignored)
 │   │   └── BrentOilPrices.csv
 │   └── processed/              # Cleaned and transformed datasets
+├── notebooks/                  # Jupyter notebooks for analysis
+│   └── 01_time_series_analysis.ipynb  # Main analysis notebook (ADF, KPSS, volatility)
+├── src/                        # Modular Python source code
+│   ├── __init__.py            # Package initialization with exports
+│   ├── data_loader.py         # Data loading and validation functions
+│   ├── time_series_analysis.py # Statistical tests (ADF, KPSS, ARCH)
+│   ├── visualization.py       # Plotting functions
+│   └── main_analysis.py       # Complete analysis pipeline script
+├── outputs/                    # Generated outputs (plots, results)
 ├── docs/                       # Project documentation
 │   ├── analysis_workflow.md    # Complete analysis workflow (1-2 pages)
 │   ├── assumptions_and_limitations.md  # Critical analysis constraints
 │   └── model_and_data_understanding.md # Model theory and data properties
 ├── references/                 # Supporting reference data
 │   └── geopolitical_events.csv # 18 key oil market events (1986-2022)
+├── requirements.txt            # Python package dependencies
 ├── .gitignore                  # Data folder exclusion
 └── README.md                   # This file
 ```
@@ -59,7 +69,27 @@ Structured CSV containing **18 major oil market events** spanning 1986-2022:
 - COVID-19 Oil Price Crash (2020)
 - Russia-Ukraine War (2022)
 
-### 3. Assumptions and Limitations Documentation
+### 3. Time Series Analysis Notebook
+**Location:** `notebooks/01_time_series_analysis.ipynb`
+
+Interactive Jupyter notebook implementing:
+- Data loading and validation
+- Stationarity testing (ADF, KPSS) with annotated results
+- Log returns computation and analysis
+- Volatility analysis with regime detection
+- ARCH effects testing
+- Comprehensive visualizations
+
+### 4. Modular Python Source Code
+**Location:** `src/`
+
+Well-structured Python modules with error handling:
+- `data_loader.py`: Data loading, validation, cleaning, and transformation
+- `time_series_analysis.py`: ADF/KPSS tests, volatility computation, ARCH testing
+- `visualization.py`: Trend plots, volatility charts, event overlays
+- `main_analysis.py`: Complete analysis pipeline script
+
+### 5. Assumptions and Limitations Documentation
 **Location:** `docs/assumptions_and_limitations.md`
 
 Critical documentation covering:
@@ -69,7 +99,7 @@ Critical documentation covering:
 - Scope limitations and appropriate/inappropriate uses
 - Recommendations for stakeholders (risk managers, policy analysts, researchers)
 
-### 4. Model and Data Understanding
+### 6. Model and Data Understanding
 **Location:** `docs/model_and_data_understanding.md`
 
 Technical foundation document covering:
@@ -146,10 +176,66 @@ Technical foundation document covering:
 
 ## Getting Started
 
-1. Review the `docs/analysis_workflow.md` for the complete methodology
-2. Examine `references/geopolitical_events.csv` for the event dataset
-3. Read `docs/assumptions_and_limitations.md` for critical caveats
-4. Consult `docs/model_and_data_understanding.md` for technical background
+### Installation
+
+1. **Clone the repository** (or navigate to the project directory)
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Verify the data file is present:**
+   - Ensure `data/raw/BrentOilPrices.csv` exists
+   - The data folder is gitignored but required for analysis
+
+### Usage
+
+#### Option 1: Jupyter Notebook (Recommended for Exploration)
+
+Launch the main analysis notebook:
+```bash
+jupyter notebook notebooks/01_time_series_analysis.ipynb
+```
+
+This notebook provides:
+- Interactive data exploration
+- Step-by-step stationarity testing with annotated results
+- Real-time visualization generation
+- Export of processed data to `outputs/` folder
+
+#### Option 2: Python Script (Command Line)
+
+Run the complete analysis pipeline:
+```bash
+python src/main_analysis.py
+```
+
+This executes:
+- Data loading and validation
+- Stationarity tests (ADF, KPSS) with logged results
+- Volatility analysis and regime detection
+- Generation of 5 visualization plots in `outputs/`
+
+#### Option 3: Import as Module
+
+Use the source modules in your own scripts:
+```python
+from src import load_brent_data, run_stationarity_tests
+from src import plot_price_trend, compute_volatility
+
+# Load and analyze data
+df = load_brent_data("data/raw/BrentOilPrices.csv")
+results = run_stationarity_tests(df['Price'], "Price Levels")
+print(results['consensus']['classification'])
+```
+
+### Quick Reference
+
+- `docs/analysis_workflow.md` - Complete methodology
+- `notebooks/01_time_series_analysis.ipynb` - Interactive analysis
+- `src/main_analysis.py` - Command-line pipeline
+- `references/geopolitical_events.csv` - Event dataset
 
 ---
 
