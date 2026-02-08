@@ -15,30 +15,58 @@ Change-Point-Analysis-and-Statistical-Modeling-of-Time-Series-Data/
 │   │   └── BrentOilPrices.csv
 │   └── processed/              # Cleaned and transformed datasets
 ├── notebooks/                  # Jupyter notebooks for analysis
-│   └── 01_time_series_analysis.ipynb  # Main analysis notebook (ADF, KPSS, volatility)
+│   ├── 01_time_series_analysis.ipynb      # Initial EDA and stationarity tests
+│   └── 02_bayesian_changepoint_analysis.ipynb  # ⭐ Bayesian change point detection
 ├── src/                        # Modular Python source code
 │   ├── __init__.py            # Package initialization with exports
 │   ├── data_loader.py         # Data loading and validation functions
 │   ├── time_series_analysis.py # Statistical tests (ADF, KPSS, ARCH)
 │   ├── visualization.py       # Plotting functions
-│   └── main_analysis.py       # Complete analysis pipeline script
-├── outputs/                    # Generated outputs (plots, results)
+│   ├── main_analysis.py       # Complete analysis pipeline script
+│   ├── bayesian_changepoint.py         # ⭐ Bayesian change point models
+│   └── changepoint_visualization.py    # ⭐ Change point visualizations
+├── results/                    # ⭐ Generated outputs (model traces, summaries)
 ├── docs/                       # Project documentation
 │   ├── analysis_workflow.md    # Complete analysis workflow (1-2 pages)
 │   ├── assumptions_and_limitations.md  # Critical analysis constraints
-│   └── model_and_data_understanding.md # Model theory and data properties
+│   ├── model_and_data_understanding.md # Model theory and data properties
+│   ├── bayesian_changepoint_methodology.md  # ⭐ Bayesian methodology
+│   ├── changepoint_analysis_guide.md        # ⭐ User guide
+│   └── project_deliverables_summary.md      # ⭐ Deliverables checklist
 ├── references/                 # Supporting reference data
-│   └── geopolitical_events.csv # 18 key oil market events (1986-2022)
-├── requirements.txt            # Python package dependencies
-├── .gitignore                  # Data folder exclusion
+│   └── geopolitical_events.csv # ⭐ 45 key oil market events (1990-2024)
+├── requirements.txt            # Python package dependencies (⭐ updated with PyMC)
+├── .gitignore                  # Data folder exclusion 
 └── README.md                   # This file
 ```
+
+⭐ = New files for Bayesian change point analysis
 
 ---
 
 ## Deliverables
 
-### 1. Analysis Workflow Document
+### 1. Bayesian Change Point Analysis ⭐ NEW
+**Location:** `notebooks/02_bayesian_changepoint_analysis.ipynb`
+
+Comprehensive Bayesian change point detection implementation:
+- PyMC-based Bayesian models with MCMC sampling
+- Mean shift and mean-variance shift models
+- Convergence diagnostics (R-hat, ESS, trace plots)
+- Posterior distributions with credible intervals
+- Quantitative impact analysis with effect sizes
+- Event association and hypothesis formulation
+- Multiple change point detection
+- Complete documentation and interpretation
+
+**Supporting Files:**
+- [`src/bayesian_changepoint.py`](src/bayesian_changepoint.py) - Core Bayesian models
+- [`src/changepoint_visualization.py`](src/changepoint_visualization.py) - Specialized visualizations
+- [`docs/bayesian_changepoint_methodology.md`](docs/bayesian_changepoint_methodology.md) - Theoretical background
+- [`docs/changepoint_analysis_guide.md`](docs/changepoint_analysis_guide.md) - User guide
+- [`CHANGEPOINT_README.md`](CHANGEPOINT_README.md) - Quick reference
+
+### 2. Analysis Workflow Document
 **Location:** `docs/analysis_workflow.md`
 
 A comprehensive 1-2 page document outlining:
@@ -47,10 +75,10 @@ A comprehensive 1-2 page document outlining:
 - Key references for methodology
 - Success criteria and evaluation metrics
 
-### 2. Geopolitical Events Dataset
+### 3. Geopolitical Events Dataset
 **Location:** `references/geopolitical_events.csv`
 
-Structured CSV containing **18 major oil market events** spanning 1986-2022:
+Structured CSV containing **45 major oil market events** spanning 1990-2024:
 - Event dates and types (OPEC Policy, Geopolitical, Financial, Natural Disaster)
 - Event names and detailed descriptions
 - Expected price impact (High/Moderate/Low Positive/Negative)
@@ -68,8 +96,10 @@ Structured CSV containing **18 major oil market events** spanning 1986-2022:
 - OPEC Supply Glut Decision (2014)
 - COVID-19 Oil Price Crash (2020)
 - Russia-Ukraine War (2022)
+- Israel-Hamas War (2023)
+- Red Sea Tensions (2024)
 
-### 3. Time Series Analysis Notebook
+### 4. Time Series Analysis Notebook
 **Location:** `notebooks/01_time_series_analysis.ipynb`
 
 Interactive Jupyter notebook implementing:
@@ -80,7 +110,7 @@ Interactive Jupyter notebook implementing:
 - ARCH effects testing
 - Comprehensive visualizations
 
-### 4. Modular Python Source Code
+### 5. Modular Python Source Code
 **Location:** `src/`
 
 Well-structured Python modules with error handling:
@@ -88,8 +118,10 @@ Well-structured Python modules with error handling:
 - `time_series_analysis.py`: ADF/KPSS tests, volatility computation, ARCH testing
 - `visualization.py`: Trend plots, volatility charts, event overlays
 - `main_analysis.py`: Complete analysis pipeline script
+- `bayesian_changepoint.py`: ⭐ Bayesian change point models with PyMC
+- `changepoint_visualization.py`: ⭐ Specialized change point visualizations
 
-### 5. Assumptions and Limitations Documentation
+### 6. Assumptions and Limitations Documentation
 **Location:** `docs/assumptions_and_limitations.md`
 
 Critical documentation covering:
@@ -99,7 +131,7 @@ Critical documentation covering:
 - Scope limitations and appropriate/inappropriate uses
 - Recommendations for stakeholders (risk managers, policy analysts, researchers)
 
-### 6. Model and Data Understanding
+### 7. Model and Data Understanding
 **Location:** `docs/model_and_data_understanding.md`
 
 Technical foundation document covering:
@@ -107,6 +139,19 @@ Technical foundation document covering:
 - **Change point models**: Purpose, application to oil prices, algorithm comparison
 - **Expected outputs**: Detected dates, regime boundaries, parameter estimates
 - **Key references**: Foundational papers and domain-specific applications
+
+### 8. Bayesian Change Point Methodology ⭐ NEW
+**Location:** `docs/bayesian_changepoint_methodology.md`
+
+Comprehensive theoretical documentation:
+- Bayesian framework and MCMC sampling
+- Model specifications (mean shift, mean-variance shift)
+- Prior selection rationale
+- Implementation details with PyMC
+- Interpretation guidelines
+- Convergence diagnostics
+- Limitations and assumptions
+- Academic references
 
 ---
 
@@ -125,7 +170,12 @@ Technical foundation document covering:
 ### Phase 3: Change Point Detection
 - Apply PELT (Pruned Exact Linear Time) algorithm for optimal segmentation
 - Binary segmentation for comparison
-- Bayesian methods for uncertainty quantification
+- ⭐ **Bayesian methods with PyMC** for full uncertainty quantification
+  - Mean shift models
+  - Mean-variance shift models
+  - MCMC sampling with NUTS algorithm
+  - Convergence diagnostics (R-hat, ESS)
+  - Posterior distributions and credible intervals
 
 ### Phase 4: Event Correlation
 - Align detected change points with compiled event dataset
@@ -146,12 +196,12 @@ Technical foundation document covering:
 
 ## Key Algorithms
 
-| Algorithm | Use Case |
-|-----------|----------|
-| **PELT** | Optimal change point detection with O(n) complexity |
-| **CUSUM** | Online/real-time change detection |
-| **Binary Segmentation** | Fast approximate detection for large datasets |
-| **Bayesian Change Point** | Uncertainty quantification around change dates |
+| Algorithm | Use Case | Implementation |
+|-----------|----------|----------------|
+| **PELT** | Optimal change point detection with O(n) complexity | Planned |
+| **CUSUM** | Online/real-time change detection | Planned |
+| **Binary Segmentation** | Fast approximate detection for large datasets | Planned |
+| **⭐ Bayesian Change Point (PyMC)** | Full uncertainty quantification with posterior distributions | ✓ Implemented |
 
 ---
 
@@ -193,7 +243,7 @@ Technical foundation document covering:
 
 #### Option 1: Jupyter Notebook (Recommended for Exploration)
 
-Launch the main analysis notebook:
+**For Initial Time Series Analysis:**
 ```bash
 jupyter notebook notebooks/01_time_series_analysis.ipynb
 ```
@@ -203,6 +253,20 @@ This notebook provides:
 - Step-by-step stationarity testing with annotated results
 - Real-time visualization generation
 - Export of processed data to `outputs/` folder
+
+**⭐ For Bayesian Change Point Analysis:**
+```bash
+jupyter notebook notebooks/02_bayesian_changepoint_analysis.ipynb
+```
+
+This notebook provides:
+- Complete Bayesian change point detection
+- MCMC sampling with PyMC
+- Convergence diagnostics and validation
+- Posterior distributions and credible intervals
+- Quantitative impact analysis
+- Event association and interpretation
+- Multiple change point detection
 
 #### Option 2: Python Script (Command Line)
 
@@ -230,12 +294,46 @@ results = run_stationarity_tests(df['Price'], "Price Levels")
 print(results['consensus']['classification'])
 ```
 
+**⭐ For Bayesian Change Point Detection:**
+```python
+from src.data_loader import load_brent_data, clean_data, compute_log_returns
+from src.bayesian_changepoint import BayesianChangePointModel
+
+# Load and prepare data
+df = load_brent_data("data/raw/BrentOilPrices.csv")
+df_clean = clean_data(df)
+df_returns = compute_log_returns(df_clean)
+returns = df_returns['Log_Returns'].dropna()
+
+# Build and fit Bayesian model
+model = BayesianChangePointModel(returns)
+model.build_model(model_type="mean_shift")
+trace = model.sample(draws=2000, tune=1000, chains=4)
+
+# Get results
+tau_idx, tau_date = model.get_change_point_estimate()
+impact = model.compute_impact()
+
+print(f"Change point: {tau_date}")
+print(f"Mean change: {impact['mu_change']:.6f}")
+print(f"Effect size: {impact['cohens_d']:.4f}")
+```
+
 ### Quick Reference
 
+**Time Series Analysis:**
 - `docs/analysis_workflow.md` - Complete methodology
 - `notebooks/01_time_series_analysis.ipynb` - Interactive analysis
 - `src/main_analysis.py` - Command-line pipeline
-- `references/geopolitical_events.csv` - Event dataset
+
+**⭐ Bayesian Change Point Analysis:**
+- `CHANGEPOINT_README.md` - Quick start guide
+- `notebooks/02_bayesian_changepoint_analysis.ipynb` - Full Bayesian analysis
+- `docs/bayesian_changepoint_methodology.md` - Theoretical background
+- `docs/changepoint_analysis_guide.md` - User guide
+
+**Data:**
+- `references/geopolitical_events.csv` - Event dataset (45 events, 1990-2024)
 
 ---
 

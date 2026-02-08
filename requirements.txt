@@ -27,5 +27,7 @@ python-dateutil>=2.8.0
 scipy>=1.7.0
 scikit-learn>=1.0.0
 
-# Optional: For advanced change point methods
-# pymc>=5.0.0  # Bayesian change point detection
+# Bayesian Modeling
+pymc>=5.0.0
+arviz>=0.15.0  # For Bayesian diagnostics and visualization
+pytensor>=2.10.0  # Backend for PyMC
